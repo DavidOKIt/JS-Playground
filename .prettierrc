@@ -1,0 +1,27 @@
+{
+  "plugins": ["prettier-plugin-astro"],
+  "tabWidth": 2,
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro",
+        "printWidth": 150
+      }
+    },
+    {
+      "files": ["*.scss", "*.css"],
+      "options": {
+        "printWidth": 150,
+        "singleAttributePerLine": false
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "options": {
+        "printWidth": 500
+      }
+    }
+  ]
+}

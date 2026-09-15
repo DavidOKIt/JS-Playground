@@ -1,0 +1,25 @@
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Cookies">
+  <h1>Cookies</h1>
+  <button class="cookieBtn">Cookie hinzufügen</button>
+  <button class="cookieDeleteBtn">Cookie löschen</button>
+  <a href="#" class="cookieSettingsLink">Cookie Einstellungen</a>
+  <div class="Modal">
+    <div class="Modal_content">
+      <h1 class="Modal_content">Hinweis zur Verwendung von Cookies</h1>
+      <p>
+        Wir nutzen Cookies und ähnliche Technologien auf unserer Website. Einige davon sind technisch notwendig (z. B. für den Warenkorb), während
+        andere uns helfen, unser Angebot zu verbessern oder Werbung anzuzeigen.Sie können alle akzeptieren, nur notwendige wählen oder Ihre
+        Einstellungen anpassen.
+      </p>
+      <div class="Modal_ButtonGrp">
+        <input class="Modal_Input" type="checkbox" id="necessary" name="necessary" />
+        <button class="Modal_Button">Accept</button>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/scripts/JS/Cookies.js"></script>
+</DefaultLayout>

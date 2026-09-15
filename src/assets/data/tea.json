@@ -1,0 +1,17 @@
+[
+  {
+    "productname": "GreenTea",
+    "src": "/Dessert.webp",
+    "description": "Very nice Tea"
+  },
+  {
+    "productname": "BlackTea",
+    "src": "/Grass.webp",
+    "description": "Very bad Tea"
+  },
+  {
+    "productname": "WhiteTea",
+    "src": "/Hydrant.webp",
+    "description": "Very okay Tea"
+  }
+]

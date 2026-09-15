@@ -1,0 +1,20 @@
+---
+import "../assets/main.scss";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Zeichenzähler">
+  <h1>Zeichenzähler</h1>
+  <textarea id="my-textarea"></textarea>
+  <div id="numberPanel">
+    <span id="numberActual">0</span>
+    <span> / </span>
+    <span id="numberMax">150</span>
+  </div>
+  <div>
+    <span id="numberRemaining">0 </span>
+    <span>verbleibend</span>
+  </div>
+</DefaultLayout>
+
+<script src="../assets/scripts/TS/Zeichenzähler.ts"></script>

@@ -1,0 +1,15 @@
+---
+import "../assets/main.scss";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Passwort Checker">
+  <h1>Passwort Checker</h1>
+  <form action="">
+    <input type="password" id="passwordInput" placeholder="Passwort eingeben" pattern="" required />
+    <div class="strengthLabel" id="strengthLabel">-</div>
+    <input type="submit" value="Überprüfen" />
+  </form>
+
+  <script src="../assets/scripts/TS/PasswortChecker.ts"></script>
+</DefaultLayout>

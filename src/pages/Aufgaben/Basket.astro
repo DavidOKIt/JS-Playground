@@ -1,0 +1,27 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Basket.js">
+  <h1>Basket</h1>
+  <ul>
+    <div class="Banane">
+      <p>Banane</p>
+      <button class="addItemBtn" data-fruit="banane">Zum Warenkorb hinzufügen</button>
+    </div>
+    <div class="Apfel">
+      <p>Apfel</p>
+      <button class="addItemBtn" data-fruit="apfel">Zum Warenkorb hinzufügen</button>
+    </div>
+    <div class="Gurke">
+      <p>Gurke</p>
+      <button class="addItemBtn" data-fruit="gurke">Zum Warenkorb hinzufügen</button>
+    </div>
+  </ul>
+  <p style="font-weight: bold">GesamtSumme: <span class="sum"></span>€</p>
+  <div>
+    <button class="clearBasketBtn">Clear Basket</button>
+  </div>
+  <div class="basket"></div>
+  <script src="../../assets/scripts/JS/Aufgaben/Basket.js"></script>
+</DefaultLayout>
