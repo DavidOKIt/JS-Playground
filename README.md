@@ -32,7 +32,7 @@ Ich hab mir immer das jeweilige Thema durchgelesen, und parallel in den oben erw
 | 11    | LocalStorage              | https://javascript.info/localstorage                                                            |
 | 12    | Fetch                     | https://javascript.info/fetch                                                                   |
 
-Unter /pages/Aufgaben und /assets/scripts/JS/Aufgaben befindet sich der "2te Teil" der Lernphase. Hier habe ich Aufgaben aus einer html von meinem Ausbilder durchgearbeitet. Diese liegt im public Ordner, ihr könnt sie einfach nochmal woanders abspeichern und dann im Browser öffnen. Der 2te Durchlauf wiederholt eigentlich nochmal alle Themen.
+Unter /pages/Aufgaben und /assets/scripts/JS/Aufgaben befindet sich der "2te Teil" der Lernphase. Hier habe ich Aufgaben aus einer html von meinem Ausbilder durchgearbeitet. Diese findet ihr rechts im repo unter "releases". Ihr könnt sie euch dort downloaden und dann im Browser öffnen. Der 2te Durchlauf wiederholt eigentlich nochmal alle Themen.
 Hier werden am Anfang jedes Themas ein paar fragen gestellt welche in den gleichnamigen MD files beantwortet werden. Die Aufgaben wurden dann jeweils in den JS Dateien bearbeitet.
 
 Viel Spaß damit und gutes lernen, ich hoffe es hat ein Nutzen (:
