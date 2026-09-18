@@ -2,23 +2,12 @@
 
 // Data
 
-const Banane = {
-  name: "Banane",
-  price: 2.99,
-  origin: "Ecuador",
-};
-
-const Apfel = {
-  name: "Apfel",
-  price: 3.99,
-  origin: "Germany",
-};
-
-const Gurke = {
-  name: "Gurke",
-  price: 1.99,
-  origin: "Spain",
-};
+const data = [
+  { id: "banane", name: "Bananas", price: 2.99, origin: "Ecuador" },
+  { id: "apfel", name: "Apples", price: 3.99, origin: "Germany" },
+  { id: "gurke", name: "Cucumbers", price: 1.99, origin: "Spain" },
+  { id: "paprika", name: "Paprika", price: 0.99, origin: "Guatemala" },
+];
 
 // global variables
 
@@ -27,102 +16,59 @@ const clearBasketBtn = document.querySelector(".clearBasketBtn");
 const sumField = document.querySelector(".sum");
 const addItemBtn = document.querySelectorAll(".addItemBtn");
 
-let bananeCount = localStorage.getItem("bananeCount") || 0;
-let apfelCount = localStorage.getItem("apfelCount") || 0;
-let gurkeCount = localStorage.getItem("gurkeCount") || 0;
-
-sumField.textContent = localStorage.getItem("totalSum") || 0;
+sumField.textContent = localStorage.getItem("sum") ?? 0;
 
 const addItemObject = () => {
   addItemBtn.forEach((button) => {
     button.addEventListener("click", () => {
-      const data = button.dataset.fruit;
+      const dataAttribute = button.dataset.fruit;
+      const object = data.find((key) => key.id === dataAttribute);
 
-      // hier könnte man vielleicht data-parameter machen und es mit dem object gleichnamig halten um
-      // conditional komplett zu umgehen
-
-      switch (data) {
-        case "banane":
-          localStorage.setItem("banane", JSON.stringify(Banane));
-          bananeCount++;
-          localStorage.setItem("bananeCount", Number(bananeCount));
-          renderItem(Banane);
-          break;
-        case "apfel":
-          localStorage.setItem("apfel", JSON.stringify(Apfel));
-          apfelCount++;
-          localStorage.setItem("apfelCount", Number(apfelCount));
-          renderItem(Apfel);
-          break;
-        case "gurke":
-          localStorage.setItem("gurke", JSON.stringify(Gurke));
-          gurkeCount++;
-          localStorage.setItem("gurkeCount", Number(gurkeCount));
-          renderItem(Gurke);
-          break;
-        default:
-          console.log("Dieses Produkt gibt es nicht :(");
-      }
+      localStorage.setItem(dataAttribute, JSON.stringify(object));
+      renderItem(object);
+      safeItems();
       calcualteBasketSum();
     });
   });
 };
 
-// hier geht aufjedenfall irgendwas fancy mit filter & map
 const calcualteBasketSum = () => {
-  let bananeSum = 0;
-  let apfelSum = 0;
-  let gurkeSum = 0;
+  const allPrices = dataFilter("price");
+  const sum = allPrices.reduce((total, currentValue) => {
+    return total + currentValue;
+  }, 0);
 
-  if (bananeCount > 0) {
-    const bananeObject = JSON.parse(localStorage.getItem("banane"));
-    const bananeNumber = localStorage.getItem("bananeCount");
-
-    bananeSum = bananeObject.price * Number(bananeNumber);
-  }
-
-  if (apfelCount > 0) {
-    const apfelObject = JSON.parse(localStorage.getItem("apfel"));
-    const apfelNumber = localStorage.getItem("apfelCount");
-
-    apfelSum = apfelObject.price * Number(apfelNumber);
-  }
-
-  if (gurkeCount > 0) {
-    const gurkeObject = JSON.parse(localStorage.getItem("gurke"));
-    const gurkeNumber = localStorage.getItem("gurkeCount");
-
-    gurkeSum = gurkeObject.price * Number(gurkeNumber);
-  }
-
-  let totalSum = bananeSum + apfelSum + gurkeSum;
-  sumField.textContent = totalSum;
-  localStorage.setItem("totalSum", totalSum);
+  localStorage.setItem("sum", sum);
+  sumField.textContent = sum;
 };
 
-const renderItem = (itemData) => {
+const renderItem = (object) => {
   const itemMarkup = `    
-    <div class="item">
-      <h3>${itemData.name}</h3>
-      <p>Price:${itemData.price}</p>
-      <p>Origin:${itemData.origin}</p>
+    <div class="item" data-id=${object.id}>
+      <h3>${object.name}</h3>
+      <p>Price:${object.price}</p>
+      <p>Origin:${object.origin}</p>
     </div>`;
   basket.insertAdjacentHTML("beforeend", itemMarkup);
 };
 
-const restoreItems = () => {
-  const bananeCount = localStorage.getItem("bananeCount");
-  for (let i = 0; i < bananeCount; i++) {
-    renderItem(Banane);
-  }
-  const apfelCount = localStorage.getItem("apfelCount");
-  for (let i = 0; i < apfelCount; i++) {
-    renderItem(Apfel);
-  }
-  const gurkeCount = localStorage.getItem("gurkeCount");
-  for (let i = 0; i < gurkeCount; i++) {
-    renderItem(Gurke);
-  }
+const safeItems = () => {
+  const totalItems = [...basket.children];
+
+  const restoredItems = totalItems.map((item) => {
+    const dataAttribute = item.dataset.id;
+    const object = data.find((key) => key.id === dataAttribute);
+    return object;
+  });
+  localStorage.setItem("safedItems", JSON.stringify(restoredItems));
+};
+
+const renderSafedItems = () => {
+  const safedItems = JSON.parse(localStorage.getItem("safedItems")) ?? [];
+
+  safedItems.forEach((item) => {
+    renderItem(item);
+  });
 };
 
 const clearBasket = () => {
@@ -130,12 +76,24 @@ const clearBasket = () => {
     localStorage.clear();
     basket.replaceChildren();
     sumField.textContent = "0";
-    bananeCount = 0;
-    apfelCount = 0;
-    gurkeCount = 0;
   });
 };
 
+const dataFilter = (objectKey) => {
+  const totalItems = [...basket.children];
+  const totalObjects = totalItems.map((item) => {
+    const dataAttribute = item.dataset.id;
+    const object = data.find((key) => key.id === dataAttribute);
+    return object[objectKey];
+  });
+
+  return totalObjects;
+};
+
+dataFilter("origin");
+
 clearBasket();
-restoreItems();
 addItemObject();
+renderSafedItems();
+
+// Optimierungen: Items stacken, also x2, x3 etc.
