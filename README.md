@@ -9,13 +9,13 @@ Um nicht immer mit einem schlechten live Server kämpfen zu müssen, ist der JS 
 - repo clonen: git clone https://github.com/DavidOKIt/JS-Playground.git
 - in den Projektordner wechseln cd .../JS-Playground
 - Abhängigkeiten installieren (darunter Astro): npm install
-- Die wichtigsten Astro comamnds:
+- Die wichtigsten Astro commands:
   - npm run dev (dev server hochstarten)
   - npm run build && npm run preview (um gebaute Seiten zu testen, falls nötig)
 
 Unter /pages und /assets/scripts/JS lassen sich die Astro Seiten und dazugehörigen JS Dateien finden die ich zuerst bearbeitet habe (nicht die im Aufgaben folder!). Vorgegangen bin ich nach dem Schema in der unten gezeigten Tabelle. JS-Info bietet sehr gute Erklärungen zu den jeweiligen Themen, allerdings sind diese auch manchmal etwas detailliert oder behandeln der Vollständigkeit halber auch veraltete Themen oder Methoden. Kann also etwas overwhelming oder verwirrend sein - man muss da nicht alles verstehen.
 
-Ich hab mir immer das jeweilige Thema durchgelesen, und parallel in den oben erwähnten Datein Tests und Übungen dazu gemacht. Am Ende der JS-Info Artikel gibt es öfters mal Übungsaufgaben, manche davon habe ich gemacht. Wenn diese vorkommen sollten sie mit einem Kommentar gekennzeichnet sein.
+Ich hab mir immer das jeweilige Thema durchgelesen, und parallel in den oben erwähnten Dateien Tests und Übungen dazu gemacht. Am Ende der JS-Info Artikel gibt es öfters mal Übungsaufgaben, manche davon habe ich gemacht. Wenn diese vorkommen sollten sie mit einem Kommentar gekennzeichnet sein.
 
 | **#** | **Thema (Dokument)**      | **javascript.info Link**                                                                        |
 | ----- | ------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ Ich hab mir immer das jeweilige Thema durchgelesen, und parallel in den oben erw
 | 11    | LocalStorage              | https://javascript.info/localstorage                                                            |
 | 12    | Fetch                     | https://javascript.info/fetch                                                                   |
 
-Unter /pages/Aufgaben und /assets/scripts/JS/Aufgaben befindet sich der "2te Teil" der Lernphase. Hier habe ich Aufgaben aus einer html von meinem Ausbilder durchgearbeitet. Dise liegt im public Ordner, ihr könnt sie einfach nochmal woanders abspeichern und dann im Browser öffnen. Der 2te druchlauf wiederholt eigentlich nochmal alle Themen.
-Hier werden am Anfang jedes Themas ein paar fragen gestellt welche in den gleichnamigen MD files beanwortet werden. Die Aufgaben wurden dann jeweils in den JS Datein bearbeitet.
+Unter /pages/Aufgaben und /assets/scripts/JS/Aufgaben befindet sich der "2te Teil" der Lernphase. Hier habe ich Aufgaben aus einer html von meinem Ausbilder durchgearbeitet. Diese liegt im public Ordner, ihr könnt sie einfach nochmal woanders abspeichern und dann im Browser öffnen. Der 2te Durchlauf wiederholt eigentlich nochmal alle Themen.
+Hier werden am Anfang jedes Themas ein paar fragen gestellt welche in den gleichnamigen MD files beantwortet werden. Die Aufgaben wurden dann jeweils in den JS Dateien bearbeitet.
 
 Viel Spaß damit und gutes lernen, ich hoffe es hat ein Nutzen (:
