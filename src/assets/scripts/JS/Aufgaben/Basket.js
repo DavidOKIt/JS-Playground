@@ -54,6 +54,7 @@ const renderItem = (object) => {
 
 const safeItems = () => {
   const totalItems = [...basket.children];
+  console.log(totalItems);
 
   const restoredItems = totalItems.map((item) => {
     const dataAttribute = item.dataset.id;
@@ -89,8 +90,6 @@ const dataFilter = (objectKey) => {
 
   return totalObjects;
 };
-
-dataFilter("origin");
 
 clearBasket();
 addItemObject();

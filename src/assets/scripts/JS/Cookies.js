@@ -25,7 +25,15 @@ modals.forEach((modal) => {
 
   const loadModal = () => {
     window.addEventListener("load", () => {
-      modal.classList.add("Modal-hidden");
+      const checkCookie = document.cookie
+        .split(";")
+        .some((c) => c.trim().startsWith("acceptance"));
+      console.log(checkCookie);
+
+      if (checkCookie === false) {
+        modal.classList.add("Modal-visible");
+      }
+
       acceptLogic();
       reopenModal();
     });
@@ -43,15 +51,15 @@ modals.forEach((modal) => {
     });
 
     acceptBtn.addEventListener("click", () => {
-      document.cookie = "test=cookies gesetzt";
-      modal.classList.toggle("Modal-hidden");
+      document.cookie = "acceptance=cookies gesetzt; ";
+      modal.classList.toggle("Modal-visible");
     });
   };
 
   const reopenModal = () => {
     const cookieLink = document.querySelector(".cookieSettingsLink");
     cookieLink.addEventListener("click", () => {
-      modal.classList.toggle("Modal-hidden");
+      modal.classList.toggle("Modal-visible");
     });
   };
   loadModal();

@@ -67,7 +67,6 @@ const advancedArrayMethods = () => {
   console.log(bought);
 
   // Der Gesamtwert des Lagers (Preis × Bestand).
-
   const totalValue = sortiment.reduce(
     (acc, item) => acc + item.preis * item.lager,
     0,
