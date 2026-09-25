@@ -66,13 +66,17 @@ const advancedArrayMethods = () => {
   const bought = sortiment.some((sortiment) => sortiment.lager === 0);
   console.log(bought);
 
-  // Der Gesamtwert des Lagers (Preis × Bestand).
-  const totalValue = sortiment.reduce(
-    (acc, item) => acc + item.preis * item.lager,
-    0,
-  );
+  // Absteigend nach Preis sortieren
+  const priceDesc = sortiment.toSorted((a, b) => b.price - a.price); // .sort wenn Orginal-Array verändert werden soll
+  console.log(priceDesc);
 
+  // Der Gesamtwert des Lagers (Preis × Bestand).
+  const totalValue = sortiment.reduce((acc, item) => acc + item.preis * item.lager, 0);
   console.log(totalValue);
+
+  // gibt nur true/false zurück
+  const hasBat3 = ids.includes(3);
+  console.log(hasBat3);
 };
 
 // Beispiel für einen komplexeres map mit allen parametern

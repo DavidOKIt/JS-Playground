@@ -1,0 +1,61 @@
+---
+import "../../assets/styles/Filter.scss";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Filter">
+  <div class="FilterSection">
+    <div class="Headings">
+      <h1 class="Heading">Produkt Filter</h1>
+      <p class="Subheading">X Produkte ab X €</p>
+    </div>
+    <div class="FilterOptions">
+      <div class="Search">
+        <input class="Search_Field" type="search" id="select-search" />
+        <button class="Search_Button">Suchen</button>
+      </div>
+      <div class="FilterGroup">
+        <select class="FilterGroup_Item" name="select-category" id="select-category">
+          <option class="option" value="" disabled hidden selected>category</option>
+          <option class="option" value="all categorys">all categorys</option>
+          <option class="option" value="men's clothing">men's clothing</option>
+          <option class="option" value="women's clothing">women's clothing</option>
+          <option class="option" value="jewelery">jewelery</option>
+          <option class="option" value="electronics">electronics</option>
+        </select>
+        <select class="FilterGroup_Item" name="price" id="select-price">
+          <option class="option" value="" disabled hidden selected>price</option>
+          <option class="option" value="all prices">all prices</option>
+          <option class="option" value="0-50">0-50 €</option>
+          <option class="option" value="50-100">50-100 €</option>
+          <option class="option" value="100-200">100-200 €</option>
+          <option class="option" value="200+">200+ €</option>
+        </select>
+        <select class="FilterGroup_Item" name="rating" id="select-rating">
+          <option class="option" value="" disabled hidden selected>rating</option>
+          <option class="option" value="all ratings">all ratings</option>
+          <option class="option" value="0-2">0 - 2 stars</option>
+          <option class="option" value="2-4">2 - 4 stars</option>
+          <option class="option" value="4-5">4 - 5 stars</option>
+        </select>
+        <select class="FilterGroup_Item" name="wishlist" id="select-wishlist">
+          <option class="option" value="" disabled hidden selected>wishlist</option>
+          <option class="option" value="all">all</option>
+          <option class="option" value="inWishlist">in wishlist</option>
+          <option class="option" value="notInWishlist">not in wishlist</option>
+        </select>
+        <select class="FilterGroup_Item" name="sort" id="select-sort">
+          <option class="option" value="" disabled hidden selected>sort by</option>
+          <option class="option" value="no sort">no sort</option>
+          <option class="option" value="price-asc">price: low to high</option>
+          <option class="option" value="price-desc">price: high to low</option>
+          <option class="option" value="rating-asc">rating: low to high</option>
+          <option class="option" value="rating-desc">rating: high to low</option>
+        </select>
+        <button class="FilterGroup_Button">Reset Filters</button>
+      </div>
+    </div>
+    <div class="Products"></div>
+  </div>
+  <script src="../../assets/scripts/JS/Aufgaben/Filter.js"></script>
+</DefaultLayout>

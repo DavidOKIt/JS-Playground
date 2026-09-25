@@ -1,0 +1,153 @@
+.FilterSection {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 1300px;
+  height: 100vh;
+  padding: 15px;
+  gap: 25px;
+}
+
+.Heading,
+.Subheading {
+  text-align: left;
+}
+
+.FilterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Search {
+  display: flex;
+  gap: 10px;
+
+  &_Field {
+    height: 40px;
+    width: 100%;
+  }
+
+  &_Button {
+    width: 100px;
+    flex-shrink: 0;
+    padding: 0 25px;
+    border-radius: 5px;
+  }
+}
+
+.FilterGroup {
+  display: flex;
+  height: 40px;
+  gap: 10px;
+
+  &_Item {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  &_Button {
+    width: 100px;
+    flex-shrink: 0;
+    padding: 0 25px;
+    border-radius: 5px;
+  }
+}
+
+.Products {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  gap: 23px;
+}
+
+.Item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  height: 420px;
+  background-color: rgb(245, 242, 242);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
+  &-checked {
+    background-color: greenyellow;
+  }
+
+  &_Img {
+    border-radius: 10px 10px 0px 0px;
+    object-fit: contain;
+    max-height: 200px;
+    min-height: 200px;
+  }
+
+  &_Details {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    text-align: left;
+    padding: 10px;
+
+    hr {
+      width: 100%;
+      color: black;
+    }
+
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  &_Text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &_Category {
+    font-size: 14px;
+  }
+
+  &_Name {
+    font-size: 18px;
+    font-weight: bold;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &_Description {
+    font-size: 14px;
+  }
+
+  &_End {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  &_End2 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_Price {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+[data-wishlist="onWishlist"] {
+  background-color: red;
+}
