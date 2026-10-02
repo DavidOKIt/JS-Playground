@@ -10,7 +10,7 @@ const fetchData = () => {
 };
 
 const data = await fetchData();
-console.log(data);
+// console.log(data);
 
 const renderItems = (data) => {
   data.slice(0, 30).forEach((object) => {
@@ -18,16 +18,19 @@ const renderItems = (data) => {
   });
 };
 
+// unused helper functions
+
 const filterData = (key) => {
   return data.map((object) => object[key]);
 };
 
-// Listener
+// Listeners
 
 const filterListener = () => {
   const filters = document.querySelectorAll(".FilterGroup_Item");
   filters.forEach((filter) => {
     filter.addEventListener("change", () => {
+      localStorage.setItem(`${filter.id}`, JSON.stringify(`${filter.value}`));
       applyAllFilters();
     });
   });
@@ -40,12 +43,20 @@ const seachListener = () => {
   });
 };
 
-const buttonListener = () => {
+const addToWishlist = () => {
   products.addEventListener("click", (e) => {
     if (!e.target.classList.contains("Item_Button")) return;
 
     const item = e.target.closest(".Item");
+    const button = item.querySelector(".Item_Button");
+
     item.classList.toggle("Item-checked");
+
+    if (item.classList.contains("Item-checked")) {
+      button.textContent = "remove from wishlist";
+    } else {
+      button.textContent = "add to wishlist";
+    }
 
     const productID = item.id;
     let wishlistItems = JSON.parse(localStorage.getItem("wishlist")) ?? [];
@@ -67,9 +78,14 @@ const resetFilters = () => {
 
   resetButton.addEventListener("click", () => {
     filters.forEach((filter) => {
-      filter.value = "";
+      console.log(filter.id);
+      localStorage.removeItem(`${filter.id}`);
+      filter.selectedIndex = 0;
     });
-    applyAllFilters();
+    localStorage.removeItem("modifiedData");
+    products.replaceChildren();
+    reapplyFilters();
+    reapplyWishlist();
   });
 };
 
@@ -88,6 +104,8 @@ const applyAllFilters = () => {
   renderItems(modifiedData);
   reapplyWishlist();
 
+  localStorage.setItem("modifiedData", JSON.stringify(modifiedData));
+
   if (products.childElementCount === 0) {
     products.innerHTML = "No products are available with these selections.";
   }
@@ -97,6 +115,9 @@ const filterCategory = (modifiedData) => {
   const selectCategory = document.getElementById("select-category").value;
   if (selectCategory !== "" && selectCategory !== "all categorys") {
     return modifiedData.filter((product) => product.category === selectCategory);
+  }
+  if (selectCategory === "all categorys") {
+    localStorage.removeItem("select-category");
   }
   return modifiedData;
 };
@@ -144,7 +165,12 @@ const filterSort = (modifiedData) => {
 
 const filterWishlist = (modifiedData) => {
   const selectWishlist = document.getElementById("select-wishlist").value;
-  if (selectWishlist !== "" && selectWishlist !== "all ratings") {
+
+  if (localStorage.getItem("wishlist") === null) {
+    localStorage.setItem("wishlist", JSON.stringify([]));
+  }
+
+  if (selectWishlist !== "" && selectWishlist !== "wihslist") {
     const wishlistIDs = JSON.parse(localStorage.getItem("wishlist")).map(Number); // wie .map((item) => Number(item))
     if (selectWishlist === "inWishlist") {
       return modifiedData.filter((product) => wishlistIDs.includes(product.id));
@@ -163,12 +189,33 @@ const filterSearch = (modifiedData) => {
   return modifiedData;
 };
 
+const reapplyFilters = () => {
+  const restoredData = JSON.parse(localStorage.getItem("modifiedData"));
+  const filters = document.querySelectorAll(".FilterGroup_Item");
+  filters.forEach((filter) => {
+    const filterValues = JSON.parse(localStorage.getItem(`${filter.id}`));
+    filter.value = filterValues || filter.value;
+  });
+
+  if (restoredData === null) {
+    renderItems(data);
+  } else {
+    renderItems(restoredData);
+  }
+
+  if (products.childElementCount === 0) {
+    products.innerHTML = "No products are available with these selections.";
+  }
+};
+
 const reapplyWishlist = () => {
   const wishlistIDs = JSON.parse(localStorage.getItem("wishlist")) ?? [];
 
   wishlistIDs.forEach((id) => {
     const product = document.getElementById(id);
+    const button = product.querySelector(".Item_Button");
     product?.classList.toggle("Item-checked");
+    button.textContent = "remove from wishlist";
   });
 };
 
@@ -199,10 +246,10 @@ const createItem = (object) => {
   products.insertAdjacentHTML("beforeend", markup);
 };
 
-renderItems(data);
+reapplyFilters();
 reapplyWishlist();
 
 filterListener();
 seachListener();
 resetFilters();
-buttonListener();
+addToWishlist();

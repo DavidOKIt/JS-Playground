@@ -1,0 +1,63 @@
+.TypeSpeedTest {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  background-color: antiquewhite;
+
+  &_Head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &_Body {
+    font-size: 35px;
+    color: rgb(56, 56, 56);
+    text-align: left;
+  }
+
+  hr {
+    margin-bottom: 25px;
+  }
+}
+
+.Settings {
+  display: flex;
+  justify-content: space-between;
+
+  &-front {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+
+  &-back {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+
+  &_Difficulty,
+  &_Mode {
+    display: flex;
+    gap: 5px;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.Word {
+  &-correct {
+    background-color: rgb(35, 192, 35);
+  }
+
+  &-incorrect {
+    background-color: rgb(199, 39, 39);
+  }
+}

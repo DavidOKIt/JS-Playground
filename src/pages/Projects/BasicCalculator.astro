@@ -1,0 +1,34 @@
+---
+import "../../assets/styles/BasicCalculator.scss";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Basic Calcualtor">
+  <h1>Basic Calculator</h1>
+  <div class="Calculator">
+    <span class="Calculator_Display">0</span>
+    <div class="Calculator_Grid">
+      <button class="Calculator_Button">C</button>
+      <button class="Calculator_Button">CE</button>
+      <button class="Calculator_Button operator">%</button>
+      <button class="Calculator_Button operator">/</button>
+      <button class="Calculator_Button number">7</button>
+      <button class="Calculator_Button number">8</button>
+      <button class="Calculator_Button number">9</button>
+      <button class="Calculator_Button operator">x</button>
+      <button class="Calculator_Button number">4</button>
+      <button class="Calculator_Button number">5</button>
+      <button class="Calculator_Button number">6</button>
+      <button class="Calculator_Button operator">-</button>
+      <button class="Calculator_Button number">1</button>
+      <button class="Calculator_Button number">2</button>
+      <button class="Calculator_Button number">3</button>
+      <button class="Calculator_Button operator">+</button>
+      <button class="Calculator_Button number">.</button>
+      <button class="Calculator_Button number">0</button>
+      <button class="Calculator_Button" disabled></button>
+      <button class="Calculator_Button" id="equals">=</button>
+    </div>
+  </div>
+  <script src="../../assets/scripts/JS/Projects/BasicCalculator.js"></script>
+</DefaultLayout>

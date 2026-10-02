@@ -1,0 +1,45 @@
+---
+import "../../assets/styles/TypeSpeedTest.scss";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="TypeSpeedTest">
+  <div class="TypeSpeedTest">
+    <div class="TypeSpeedTest_Head">
+      <h2>Type Speed Test</h2>
+      <p>Personal Best:<span>xyWPM</span></p>
+    </div>
+    <div class="Settings">
+      <div class="Settings-front">
+        <div class="Settings-WPM">
+          <p>WPM: <span>40</span></p>
+        </div>
+        <div class="Settings_Accuracy">
+          <div class="Settings-WPM">
+            <p>Accuracy: <span>40</span></p>
+          </div>
+        </div>
+        <div class="Settings_Time">
+          <p>Time: <span>60s</span></p>
+        </div>
+      </div>
+      <div class="Settings-back">
+        <div class="Settings_Difficulty">
+          <p>Difficulty: <span>60s</span></p>
+          <button class="Settings_Button" id="easy">Easy</button>
+          <button class="Settings_Button" id="medium">Medium</button>
+          <button class="Settings_Button" id="hard">Hard</button>
+        </div>
+        <div class="Settings_Mode">
+          <p>Mode: <span>60s</span></p>
+          <button>Timed (60s)</button>
+          <button>Passage</button>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="TypeSpeedTest_Body">dadaddada</div>
+    <input type="text" class="TypeSpeedTest_Input" />
+  </div>
+  <script src="../../assets/scripts/JS/Projects/TypeSpeedTest.js"></script>
+</DefaultLayout>

@@ -1,0 +1,30 @@
+.Calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 10px 10px 10px;
+  background-color: rgb(211, 211, 211);
+  border-radius: 5px;
+
+  &_Display {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+  }
+
+  &_Grid {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(4, 50px);
+    grid-auto-rows: 50px;
+    font-weight: bold;
+  }
+
+  &_Button {
+    font-weight: bold;
+  }
+}
+
+#equals {
+  background-color: rgb(69, 150, 255);
+}
