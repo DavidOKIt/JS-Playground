@@ -3,8 +3,8 @@ const buttons = document.querySelectorAll(".Calculator_Button");
 
 let currentInput = "";
 let previousInput = "";
-let operator = "";
-let lastOperator = "";
+let currentOperator = "";
+let previousOperator = "";
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => handleButtonClick(e));
@@ -14,38 +14,35 @@ const handleButtonClick = (e) => {
   if (e.target.textContent === "C") {
     currentInput = "";
     previousInput = "";
-    operator = "";
+    currentOperator = "";
+    previousOperator = "";
     display.textContent = 0;
   }
 
   if (e.target.textContent === "CE") {
     currentInput = "";
-    display.textContent = 0;
   }
 
   if (e.target.className === "Calculator_Button number") {
     if (currentInput.length < 7) {
       currentInput = currentInput + e.target.textContent;
     }
-
-    console.log(currentInput);
     display.textContent = currentInput;
   }
 
   if (e.target.className === "Calculator_Button operator") {
-    operator = e.target.textContent;
-    if (lastOperator !== "") {
-      const result = calcualte(previousInput, currentInput, operator);
+    if (previousInput !== "" && currentInput !== "") {
+      const result = calcualte(previousInput, currentInput, currentOperator);
+      currentInput = result;
       display.textContent = result;
     }
+    currentOperator = e.target.textContent;
     previousInput = currentInput;
     currentInput = "";
-
-    lastOperator = operator;
   }
 
   if (e.target.textContent === "=") {
-    const result = calcualte(previousInput, currentInput, operator);
+    const result = calcualte(previousInput, currentInput, currentOperator);
     display.textContent = result;
   }
 };

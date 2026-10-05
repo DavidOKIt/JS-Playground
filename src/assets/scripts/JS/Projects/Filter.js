@@ -1,7 +1,8 @@
 const products = document.querySelector(".Products");
 
 const fetchData = () => {
-  return fetch("https://fakestoreapi.com/products")
+  // return fetch("https://fakestoreapi.com/products")
+  return fetch("http://localhost:2000/api/storeProducts")
     .then((response) => response.json())
     .catch((error) => {
       console.log("Keine Daten Verfügbar", error);
@@ -213,7 +214,7 @@ const reapplyWishlist = () => {
 
   wishlistIDs.forEach((id) => {
     const product = document.getElementById(id);
-    const button = product.querySelector(".Item_Button");
+    const button = product.querySelector(".Item_Button") || null;
     product?.classList.toggle("Item-checked");
     button.textContent = "remove from wishlist";
   });
