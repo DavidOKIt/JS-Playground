@@ -1,0 +1,45 @@
+---
+import "../../assets/styles/Tooltip.scss";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+
+interface TooltipProps {
+  loadScript?: boolean;
+}
+
+const { loadScript = true } = Astro.props as TooltipProps;
+---
+
+<DefaultLayout title="Tooltip">
+  <h1>Tooltip</h1>
+  <button title="Tooltip Info">Hover me!</button>
+  <button class="TestBtn" data-tooltip="Tooltip Text ↓">Test CSS</button>
+  <button class="TestButton" popovertarget="popInfo" popovertargetaction="toggle">Popover Test</button>
+  <div id="popInfo" popover>Das ist ein Popover</div>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <div style="display: flex; gap: 25px;">
+    <button id="ButtonInfo" class="TestBtnJS" data-tooltip-js="Tooltip Text ">Test JS dad ad adadad</button>
+    <p>Content</p>
+    <p>Content</p>
+    <p>Content</p>
+    <p>Content</p>
+  </div>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <button class="TestBtnJS" data-tooltip-js="Tooltip Text ">Test JS dad ad adadad</button>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+  <div class="TestModal" data-tooltip="Modal Tooltip Info" style="position: relative;" tabindex="0"><p>Test modal heeere</p></div>
+  <p>Content</p>
+  <p>Content</p>
+  <p>Content</p>
+
+  {loadScript && <script src="../../assets/scripts/JS/Projects/Tooltip.js" />}
+</DefaultLayout>

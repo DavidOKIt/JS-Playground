@@ -1,13 +1,15 @@
 const products = document.querySelector(".Products");
 
 const fetchData = () => {
-  // return fetch("https://fakestoreapi.com/products")
-  return fetch("http://localhost:2000/api/storeProducts")
-    .then((response) => response.json())
-    .catch((error) => {
-      console.log("Keine Daten Verfügbar", error);
-      products.textContent = "Keine Suchergebnisse gefunden";
-    });
+  return (
+    fetch("https://fakestoreapi.com/products")
+      // return fetch("http://localhost:2000/api/storeProducts")
+      .then((response) => response.json())
+      .catch((error) => {
+        console.log("Keine Daten Verfügbar", error);
+        products.textContent = "Keine Suchergebnisse gefunden";
+      })
+  );
 };
 
 const data = await fetchData();
