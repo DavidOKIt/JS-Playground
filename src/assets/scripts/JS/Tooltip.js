@@ -88,8 +88,3 @@ const dynamicTooltip = (className) => {
 dynamicTooltip("TestModal");
 
 // Selection ist aktuell immer über die Klasse, über das Attribut selbst und dann tooltip ausgeben würde ich auch hinbekommen
-
-// API Test
-
-const testButton = document.querySelector(".TestButton");
-testButton.togglePopover;

@@ -1,6 +1,6 @@
 ---
-import "../../assets/styles/Tooltip.scss";
-import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../assets/styles/Tooltip.scss";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
 
 interface TooltipProps {
   loadScript?: boolean;
@@ -41,5 +41,5 @@ const { loadScript = true } = Astro.props as TooltipProps;
   <p>Content</p>
   <p>Content</p>
 
-  {loadScript && <script src="../../assets/scripts/JS/Projects/Tooltip.js" />}
+  {loadScript && <script src="../assets/scripts/JS/Tooltip.js" />}
 </DefaultLayout>
