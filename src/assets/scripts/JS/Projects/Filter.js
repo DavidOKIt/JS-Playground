@@ -2,18 +2,19 @@ const products = document.querySelector(".Products");
 
 const fetchData = () => {
   return (
-    fetch("https://fakestoreapi.com/products")
-      // return fetch("http://localhost:2000/api/storeProducts")
+    fetch("https://dave-fake-api.vercel.app/api/storeProducts") // API - web
+      // fetch("http://localhost:2000/api/storeProducts") // API - lokal
       .then((response) => response.json())
       .catch((error) => {
         console.log("Keine Daten Verfügbar", error);
         products.textContent = "Keine Suchergebnisse gefunden";
+        return [];
       })
   );
 };
 
 const data = await fetchData();
-// console.log(data);
+console.log(data);
 
 const renderItems = (data) => {
   data.slice(0, 30).forEach((object) => {
@@ -216,9 +217,9 @@ const reapplyWishlist = () => {
 
   wishlistIDs.forEach((id) => {
     const product = document.getElementById(id);
-    const button = product.querySelector(".Item_Button") || null;
-    product?.classList.toggle("Item-checked");
-    button.textContent = "remove from wishlist";
+    if (!product) return;
+    product.classList.add("Item-checked");
+    product.querySelector(".Item_Button").textContent = "remove from wishlist";
   });
 };
 

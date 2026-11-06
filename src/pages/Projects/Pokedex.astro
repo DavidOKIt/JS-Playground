@@ -1,0 +1,18 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../assets/styles/Pokedex.scss";
+---
+
+<DefaultLayout title="Pokedex">
+  <h1>Pokedex</h1>
+  <div class="Pokedex">
+    <div class="Search">
+      <input class="Search_Bar" type="search" id="search" placeholder="Search any Pokemon" />
+      <button class="Search_Btn">Search</button>
+      <button class="Evolution_Btn">Evolutions only</button>
+      <button class="Team_Btn">Random Team</button>
+    </div>
+    <div class="Display"></div>
+  </div>
+  <script src="../../assets/scripts/JS/Projects/Pokedex.js"></script>
+</DefaultLayout>

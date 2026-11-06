@@ -5,6 +5,7 @@ const sections = document.querySelectorAll(".Section");
 const observer = new IntersectionObserver(
   (entries, obs) => {
     entries.forEach((entry) => {
+      // if (!entry.isIntersecting) return; // alternative Schreibweise: feuer nich wenn entry nicht sichtbar ist
       if (entry.isIntersecting) {
         console.log("visible");
         // console.log(entry.target); // gibt html element
@@ -33,7 +34,10 @@ const imgObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const dataAttribute = entry.target.dataset.src;
+        let dataSrc = entry.target.src;
+        // console.log(dataSrc);
         entry.target.src = dataAttribute;
+
         obs.unobserve(entry.target);
       }
     });
@@ -50,21 +54,94 @@ images.forEach((img) => {
 
 // loadinglazy superior?
 
-// Aufgabe mit fetch
+// Aufgabe mit fetch - eigen Lösung
+
+// const cardSection = document.querySelector(".CardSection");
+// let indexStart = 0;
+// let indexEnd = 10;
+
+// const getData = () => {
+//   return fetch("https://jsonplaceholder.typicode.com/posts")
+//     .then((response) => response.json())
+//     .catch((error) => {
+//       console.log("Fehler:", error);
+//     });
+// };
+
+// const data = await getData();
+
+// const createItem = (object) => {
+//   const markup = `
+//     <div class="Card">
+//       <h3 class="Card_Title">${object.title}</h3>
+//       <p class="Card_Text">${object.body}</p>
+//       <span>${object.id}</span>
+//     </div>`;
+
+//   cardSection.insertAdjacentHTML("beforeend", markup);
+// };
+
+// const createLoader = () => {
+//   const loader = document.createElement("div");
+//   loader.classList.add("loader");
+//   cardSection.after(loader);
+// };
+
+// const renderItems = () => {
+//   data.slice(indexStart, indexEnd).forEach((object) => {
+//     createItem(object);
+//   });
+// };
+
+// const loaderObserver = new IntersectionObserver(
+//   (entries, obs) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         indexStart += 10;
+//         indexEnd += 10;
+//         renderItems();
+
+//         if (indexEnd >= 110) {
+//           console.log("fired");
+//           obs.disconnect();
+//         }
+
+//         // obs.unobserve(entry.target);
+//       }
+//     });
+//     // if (entries[0].isIntersecting) { // geht auch aber nur bei genau einem zu trackendem element, mit forEach ist der Standard
+//     //   console.log("fired");
+//     // }
+//   },
+//   {
+//     rootMargin: "0px 0px 200px 0px",
+//   },
+// );
+
+// renderItems();
+// createLoader();
+
+// const loaders = document.querySelectorAll(".loader");
+// console.log(loaders);
+
+// loaders.forEach((loader) => {
+//   loaderObserver.observe(loader);
+// });
+
+// Aufgabe mit fetch - API Pagination -> regelungen sind API spezifisch
 
 const cardSection = document.querySelector(".CardSection");
-let indexStart = 0;
-let indexEnd = 10;
+let page = 1;
+const limit = 10;
 
 const getData = () => {
-  return fetch("https://jsonplaceholder.typicode.com/posts")
+  return fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`) // moderne Lösung
     .then((response) => response.json())
     .catch((error) => {
       console.log("Fehler:", error);
+      return [];
     });
 };
-
-const data = await getData();
 
 const createItem = (object) => {
   const markup = `
@@ -83,42 +160,35 @@ const createLoader = () => {
   cardSection.after(loader);
 };
 
-const renderItems = () => {
-  data.slice(indexStart, indexEnd).forEach((object) => {
+const renderItems = async () => {
+  const data = await getData();
+  data.forEach((object) => {
     createItem(object);
   });
 };
 
 const loaderObserver = new IntersectionObserver(
   (entries, obs) => {
-    entries.forEach((entry) => {
+    entries.forEach(async (entry) => {
       if (entry.isIntersecting) {
-        indexStart += 10;
-        indexEnd += 10;
-        renderItems();
+        page++;
+        await renderItems();
 
-        if (indexEnd >= 110) {
-          console.log("fired");
+        if (page >= 10) {
           obs.disconnect();
         }
-
-        // obs.unobserve(entry.target);
       }
     });
-    // if (entries[0].isIntersecting) { // geht auch aber nur bei genau einem zu trackendem element, mit forEach ist der Standard
-    //   console.log("fired");
-    // }
   },
   {
     rootMargin: "0px 0px 200px 0px",
   },
 );
 
-renderItems();
+await renderItems();
 createLoader();
 
 const loaders = document.querySelectorAll(".loader");
-console.log(loaders);
 
 loaders.forEach((loader) => {
   loaderObserver.observe(loader);

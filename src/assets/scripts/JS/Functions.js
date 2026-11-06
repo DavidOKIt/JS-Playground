@@ -52,3 +52,20 @@ function pow() {
   let result = x ** n;
   alert(result);
 }
+
+// count words function
+
+const text = "hallo so wie gehts den so";
+
+const countWords = (text) => {
+  const singleWords = text.split(" ");
+  const counts = {};
+  for (const word of singleWords) {
+    if (counts[word]) {
+      counts[word]++;
+    } else {
+      counts[word] = 1;
+    }
+  }
+  return counts;
+};

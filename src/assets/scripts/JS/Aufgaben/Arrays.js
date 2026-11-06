@@ -50,7 +50,7 @@ const advancedArrayMethods = () => {
     { id: 4, name: "Bela", preis: 229, lager: 2 },
   ];
 
-  // Alle Namen als einfaches Array.
+  // Alle Namen als einfaches Array. gibt auch flatMap
   const names = sortiment.map((sortiment) => sortiment.name);
   console.log(names);
 
