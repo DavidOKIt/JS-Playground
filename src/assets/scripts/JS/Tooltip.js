@@ -1,5 +1,7 @@
 const buttons = document.querySelectorAll(".TestBtnJS");
 const body = document.querySelector("body");
+const window = globalThis;
+console.log(window);
 
 buttons.forEach((button) => {
   button.addEventListener("mouseenter", () => {
@@ -19,8 +21,6 @@ buttons.forEach((button) => {
   });
 
   button.addEventListener("keydown", (e) => {
-    console.log(e);
-
     if (e.key === "Escape") {
       removeTooltip();
     }
@@ -29,9 +29,13 @@ buttons.forEach((button) => {
 
 const createTooltip = (button) => {
   const tooltipContent = button.dataset.tooltipJs;
-  console.log(tooltipContent);
+  const rect = button.getBoundingClientRect();
+  const distanceBottom = window.innerHeight - rect.bottom;
 
-  const tooltip = `<div id="ButtonInfo" class="Tooltip" role="tooltip">${tooltipContent}</div>`;
+  let positioning = "top";
+  if (distanceBottom <= 40) positioning = "bottom";
+
+  const tooltip = `<div id="ButtonInfo" class="Tooltip Tooltip-${positioning}" role="tooltip">${tooltipContent}</div>`;
   button.insertAdjacentHTML("afterbegin", tooltip);
 };
 
@@ -42,7 +46,7 @@ const removeTooltip = () => {
   });
 };
 
-// Fancy
+// Fancy -> dynamische vergebung des Tooltips über className
 
 const dynamicTooltip = (className) => {
   const elements = document.querySelectorAll(`.${className}`);
