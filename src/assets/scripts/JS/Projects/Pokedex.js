@@ -14,30 +14,13 @@ Pokedex.forEach((pokedex) => {
     controller = new AbortController();
   };
 
-  const handleResponse = (response) => {
-    if (!response.ok) {
-      const error = new Error("HTTP: " + response.status);
-      error.status = response.status;
-      throw error;
-    }
-    return response.json();
-  };
-
-  const handleError = (error) => {
-    if (error.name === "AbortError") {
-      if (timedOut) display.textContent = "Request timed out";
-      return;
-    }
-
-    if (error.status === 404) {
-      display.textContent = "No Pokemon found";
-    } else {
-      display.textContent = "Something went wrong, try again later";
-    }
-  };
-
   const fetchSinglePokemon = (name) => {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, { signal: controller.signal }).then(handleResponse);
+  };
+
+  const fetchRandomPokemon = () => {
+    const randomNumber = Math.floor(Math.random() * (1025 - 1 + 1)) + 1;
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`, { signal: controller.signal }).then(handleResponse);
   };
 
   const fetchSpecies = (name) => {
@@ -50,12 +33,74 @@ Pokedex.forEach((pokedex) => {
       .then((data) => evolutionHandler(data));
   };
 
+  const handleResponse = (response) => {
+    if (!response.ok) {
+      const error = new Error("HTTP: " + response.status);
+      error.status = response.status;
+      throw error;
+    }
+    return response.json();
+  };
+
+  const handleError = (error, timedOut = false) => {
+    if (error.name === "AbortError") {
+      if (timedOut) display.textContent = "Request timed out";
+      return;
+    }
+
+    if (error.status === 404) {
+      display.textContent = "No Pokemon found";
+    } else {
+      display.textContent = "Something went wrong, try again later";
+    }
+  };
+
   const evolutionHandler = (evolutionData) => {
     const collectNames = (node) => {
       return [node.species.name, ...node.evolves_to.flatMap(collectNames)];
     };
     const evolutionNames = collectNames(evolutionData.chain);
     return evolutionNames;
+  };
+
+  const randomTeamHandler = async () => {
+    const currentController = controller;
+    const { signal } = controller;
+
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      currentController.abort();
+    }, 3000);
+
+    try {
+      addSpinner();
+      await wait();
+      if (signal.aborted) return;
+
+      console.time("fetchTest");
+
+      // alle zusammen fetchen mit Promise.all -> dauert so lange wie der längste einzelne request
+
+      const randomPokemons = await Promise.all(Array.from({ length: 6 }, () => fetchRandomPokemon()));
+      if (signal.aborted) return;
+      // alle einzeln fetchen per loop -> dauer aller anfragen da der loop erst die nächste iteration macht wenn die promise fullfilled ist
+
+      // const randomPokemons = [];
+      // for (let i = 0; i < 6; i++) {
+      //   randomPokemons.push(await fetchRandomPokemon());
+      // }
+      console.timeEnd("fetchTest");
+
+      randomPokemons.forEach((pokemon) => {
+        createPokemon(pokemon);
+      });
+    } catch (error) {
+      handleError(error, timedOut);
+    } finally {
+      clearTimeout(timeout);
+      if (!signal.aborted || timedOut) removeSpinner();
+    }
   };
 
   const wait = () => {
@@ -75,7 +120,8 @@ Pokedex.forEach((pokedex) => {
     display.querySelector(".pokeball")?.remove();
   };
 
-  // event listeners
+  // EVENT LISTENER //
+
   const listeners = () => {
     searchBtn.addEventListener("click", async (e) => {
       display.replaceChildren();
@@ -94,9 +140,11 @@ Pokedex.forEach((pokedex) => {
       await searchHandler(e);
     });
 
-    // teamBtn.addEventListener("click", asnyc() => {
-
-    // })
+    teamBtn.addEventListener("click", async () => {
+      display.replaceChildren();
+      resetController();
+      await randomTeamHandler();
+    });
 
     display.addEventListener("click", async (e) => {
       const btn = e.target.closest(".EvolutionCard_Btn");
@@ -164,7 +212,7 @@ Pokedex.forEach((pokedex) => {
         });
       }
     } catch (error) {
-      handleError(error);
+      handleError(error, timedOut);
     } finally {
       clearTimeout(timeout);
       if (signal.aborted && !timedOut) return;
