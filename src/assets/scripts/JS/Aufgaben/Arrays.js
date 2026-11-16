@@ -92,5 +92,3 @@ const complexMapExample = () => {
   });
   console.log(detailedNumbers);
 };
-
-// complexMapExample();
